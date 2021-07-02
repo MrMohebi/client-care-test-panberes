@@ -1,0 +1,27 @@
+{
+  "name": "panberes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "panberes",
+  "author": "Mokafela",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "bootstrap": "^5.0.2",
+    "gatsby": "^3.8.1",
+    "gatsby-plugin-manifest": "^3.8.0",
+    "gatsby-plugin-sitemap": "^4.4.0",
+    "popper.js": "^1.16.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}

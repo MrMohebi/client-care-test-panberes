@@ -1,0 +1,98 @@
+html, body, #___gatsby, main, #gatsby-focus-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "IRANYekanBlack";
+  src: url("../assets/fonts/IRANYekanBlack.ttf");
+}
+.IranYekanBlack {
+  font-family: "IRANYekanBlack", serif;
+}
+
+@font-face {
+  font-family: "IRANYekan";
+  src: url("../assets/fonts/IRANYekanRegular.ttf");
+}
+.IranYekan {
+  font-family: "IRANYekan", serif;
+}
+
+.main-grad {
+  background: linear-gradient(45deg, #F7F0FF 80%, #fff 100%);
+}
+
+.main-page-detail-container {
+  display: flex;
+  flex-flow: column;
+  width: 70%;
+  direction: rtl;
+  border-right: solid 4px rebeccapurple;
+  padding: 0 10px;
+  margin-top: 110px;
+}
+
+.main-page-gender-container {
+  width: 70%;
+  direction: rtl;
+  margin-top: 100px;
+}
+
+.purple-text {
+  color: #735B90;
+}
+
+.flower {
+  width: 20px;
+  height: 20px;
+  margin: 0 0 0 10px;
+}
+
+.gender-square {
+  position: relative;
+  width: 130px;
+  height: 150px;
+  margin: 0 10px;
+  border-radius: 15px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  padding: 15px 10px 0 10px;
+  z-index: 2;
+}
+
+.male-gender {
+  background: #E4F0FF;
+}
+
+.female-gender {
+  background: #FAE0EC;
+  direction: rtl;
+}
+
+.gender-image {
+  width: 70px;
+}
+
+.male-dots {
+  width: 100px;
+  margin-top: -20px;
+  margin-left: -20px;
+  opacity: 0.7;
+}
+
+.female-dots {
+  width: 100px;
+  margin-top: -20px;
+  margin-right: -20px;
+  opacity: 0.7;
+}
+
+/*# sourceMappingURL=Main.css.map */
