@@ -5,7 +5,7 @@ import pbt from '../assets/img/panberes/pbt.png'
 
 const PanberesLogo = () => {
     return (
-        <div className={'d-flex flex-row align-items-center panberes-logo-container '}>
+        <div className={'d-flex flex-row align-items-center panberes-logo-container '} style={{padding:'30px 0 0 20px'}}>
             <img className={'panberes-logo'} src={pl} alt="panberes,Panberiz"/>
             <img className={'panberes-logo-text'} src={pbt} alt=""/>
         </div>

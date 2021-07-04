@@ -95,4 +95,116 @@ html, body, #___gatsby, main, #gatsby-focus-wrapper {
   opacity: 0.7;
 }
 
+.male-main-container {
+  background: linear-gradient(to bottom, #E4F0FF, #fff);
+}
+
+.vector-holder {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: url("../assets/img/vectors/maleVec.png");
+  width: 150px;
+  height: 300px;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.skin-type-container {
+  margin: auto;
+  width: 95%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  border: solid #535759 1px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.skin-type-container .MuiFormControl-root {
+  width: 95%;
+}
+.skin-type-container .MuiFormGroup-root {
+  justify-content: center;
+}
+.skin-type-container fieldset {
+  white-space: nowrap;
+}
+.skin-type-container fieldset .MuiFormGroup-row {
+  transform: scale(0.8);
+}
+.skin-type-container fieldset div {
+  flex-wrap: nowrap;
+}
+.skin-type-container fieldset div label span {
+  font-family: IranYekan, serif;
+}
+.skin-type-container fieldset legend {
+  font-family: IranYekan, serif;
+  text-align: center;
+}
+
+.selects {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  position: relative;
+  margin-top: 30px;
+}
+.selects div .check-boxes {
+  opacity: 0;
+  transform: translate(-20px, 0);
+}
+
+.options-container {
+  width: 100%;
+  margin: 0 10px;
+  height: 50px;
+}
+
+.options {
+  display: flex;
+  direction: rtl;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.options-container {
+  display: flex;
+}
+
+.check-box {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+}
+
+.check-box-round {
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  box-shadow: #d2d2d2 0 0 11px 0;
+}
+
+.each-option-lable {
+  margin: 0 10px 0 0;
+  white-space: nowrap;
+}
+
+.check-boxes {
+  min-width: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+svg line {
+  transition: stroke-dashoffset 0.4s ease;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+}
+
 /*# sourceMappingURL=Main.css.map */

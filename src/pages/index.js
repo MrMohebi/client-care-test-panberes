@@ -2,7 +2,6 @@ import * as React from "react"
 
 import PanberesLogo from "../components/PanberesLogo";
 
-import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../css/Main.css'
 
@@ -11,17 +10,25 @@ import male from '../assets/img/panberes/male.png'
 import female from '../assets/img/panberes/female.png'
 
 import * as svgs from '../assets/svgs'
+import {useEffect} from "react";
+import {Link} from "gatsby";
 
 
-require('bootstrap');
+// require('bootstrap');
 
 const IndexPage = () => {
+
+
+    useEffect(() => {
+        window.sessionStorage.setItem('UserChoices','[]')
+    },[]);
+
     return (
         <main>
             <div className={'main-container w-100 h-100 overflow-hidden main-grad '}>
 
                 <div className={'upper-part h-50 overflow-hidden'}>
-                    <div className={' position-absolute'} style={{margin: '15px 15px'}}>
+                    <div className={' position-absolute'} >
                         <PanberesLogo/>
                     </div>
                     <div className={'tittle-center d-flex justify-content-center align-items-center w-100'}>
@@ -41,9 +48,9 @@ const IndexPage = () => {
 
                     <div className={'tittle-center mt-4 d-flex justify-content-center align-items-center w-100'} >
                         <div>
-                            <div className={'gender-square male-gender'}>
+                            <Link className={'gender-square male-gender'} to={'/male'}>
                                 <img className={'gender-image'} src={male} alt="مرد"/>
-                            </div>
+                            </Link>
                             <div className={'male-dots'}>{svgs.maleDots}</div>
                         </div>
 
