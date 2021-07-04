@@ -15,33 +15,33 @@ const Male = () => {
             name: 'خط پیشانی',
             vectorX: 20,
             vectorY: 240,
-            leftOffset: 6
+            leftOffset: 8
         },
             {
                 name: 'خط   اخم',
                 vectorX: 30,
                 vectorY: 220,
-                leftOffset: 6
+                leftOffset: 4
             }, {
             name: 'نیاز به آب رسان',
             vectorX: 40,
             vectorY: 260,
-            leftOffset: 6
+            leftOffset: 4
         }, {
             name: 'نیاز به نرم کننده',
             vectorX: 60,
             vectorY: 230,
-            leftOffset: 6
+            leftOffset: 9
         }, {
             name: 'خط گوشه چشم',
             vectorX: 70,
             vectorY: 200,
-            leftOffset: 6
+            leftOffset: 3
         }, {
             name: 'منافز باز',
             vectorX: 80,
             vectorY: 170,
-            leftOffset: 6
+            leftOffset: 5
         }],
 
 
@@ -123,23 +123,38 @@ const Male = () => {
     let changeSection = (newSectionId)=>{
         let storedUserChoices = JSON.parse(window.sessionStorage.getItem('UserChoices'))
 
-        let firsttime = true;
+        let firstTime = true;
 
         for (let index = 0;index<document.querySelector('.selects').childNodes.length;index++){
-            gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[0], {
-                strokeDashoffset: 1000,
-            })
-            gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1], {
-                strokeDashoffset: 1000,
-            })
+            // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[0], {
+            //     strokeDashoffset: 1000,
+            //     duration:0.1,
+            //     delay:0.3,
+            //
+            // })
+            // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1], {
+            //     strokeDashoffset: 1000,
+            //     duration:0.1
+            // })
+            //
+            // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[0], {
+            //     strokeDashoffset: 0,
+            //     delay:0.8,
+            // })
+            // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1], {
+            //     strokeDashoffset: 0,
+            //     delay:1.2
+            // })
+
+
             gsap.to(document.querySelector('.selects').childNodes[index].firstChild, {
                 x: -20,
                 opacity: 0,
                 duration:0.2,
                 onComplete:()=>{
-                    if (firsttime){
+                    if (firstTime){
                         setChoicesElement(newSectionId)
-                        firsttime = false;
+                        firstTime = false;
                     }
                     for (let index = 0;index<document.querySelector('.selects').childNodes.length;index++){
                         if (storedUserChoices) {
@@ -159,12 +174,7 @@ const Male = () => {
                             }
                         }
 
-                        gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[0], {
-                            strokeDashoffset: 0,
-                        })
-                        gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1], {
-                            strokeDashoffset: 0,
-                        })
+
                         gsap.to(document.querySelector('.selects').childNodes[index].firstChild, {
                             x:0,
                             opacity: 1,
@@ -186,13 +196,13 @@ const Male = () => {
                             opacity: 1,
                             delay: 0.1 * index,
                             onComplete: () => {
-                                gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[0], {
-                                    strokeDashoffset: 0,
-                                })
-                                gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1], {
-                                    strokeDashoffset: 0,
-                                    delay: 0.2
-                                })
+                                // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[0], {
+                                //     strokeDashoffset: 0,
+                                // })
+                                // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1], {
+                                //     strokeDashoffset: 0,
+                                //     delay: 0.2
+                                // })
                             }
                         })
                     }
@@ -202,7 +212,7 @@ const Male = () => {
             })
 
         }
-        firsttime = true;
+        firstTime = true;
 
     }
     let tabsChangeCallback = ((backData)=>{

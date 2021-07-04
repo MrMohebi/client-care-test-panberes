@@ -136,7 +136,7 @@ export const check = <svg style={{transform:'scale(0)',opacity:0}} width={32} he
 >
     <g width={25} height={28}>
         <g id="check_x5F_alt">
-            <path width={25} height={25} style={{fill:"#76FF19",width:20,height:20}} d="M16,0C7.164,0,0,7.164,0,16s7.164,16,16,16s16-7.164,16-16S24.836,0,16,0z M13.52,23.383
+            <path width={25} height={25} style={{fill:"#745597",width:20,height:20}} d="M16,0C7.164,0,0,7.164,0,16s7.164,16,16,16s16-7.164,16-16S24.836,0,16,0z M13.52,23.383
 			L6.158,16.02l2.828-2.828l4.533,4.535l9.617-9.617l2.828,2.828L13.52,23.383z"/>
         </g>
     </g>
