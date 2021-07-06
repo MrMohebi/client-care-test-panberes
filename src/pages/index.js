@@ -55,9 +55,9 @@ const IndexPage = () => {
                         </div>
 
                         <div style={{direction:"rtl"}}>
-                            <div className={'gender-square female-gender'}>
+                            <Link to={'/female'} className={'gender-square female-gender'}>
                                 <img className={'gender-image'} src={female} alt="زن"/>
-                            </div>
+                            </Link>
                             <div className={'female-dots'}>{svgs.femaleDots}</div>
 
                         </div>

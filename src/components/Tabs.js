@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {withStyles} from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -20,8 +20,8 @@ const StyledTab = withStyles((theme) => ({
     root: {
         textTransform: 'none',
         color: '#000000',
-        fontSize:'0.8rem',
-        fontFamily:'Iranyekan',
+        fontSize: '0.8rem',
+        fontFamily: 'Iranyekan',
         marginRight: theme.spacing(1),
         '&:focus': {
             opacity: 1,
@@ -32,18 +32,42 @@ const StyledTab = withStyles((theme) => ({
 
 export default function CustomizedTabs(props) {
     const [value, setValue] = React.useState(0);
+    const [disabledClass, setDisabledClass] = React.useState('');
+    const tabRef = React.useRef(null)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
         props.tabsChangeCallback(newValue);
+        tabRef.current.classList.add('p-event-none')
+        setTimeout(() => {
+            try {
+                tabRef.current.classList.remove('p-event-none')
+
+            }catch (e){
+                console.log(e)
+            }
+        }, 1000)
     };
 
+    useEffect(()=>{
+        setValue(props.tabVal)
+        handleChange(0, props.tabVal)
+    },[props.tabVal])
+
     return (
-        <div className={'w-100 d-flex m-auto pt-5 justify-content-center IranYekan'}>
+        <div  ref={tabRef} className={'tab-holder w-100 d-flex m-auto pt-5 justify-content-center IranYekan rtl p-event-none'}>
             <StyledTabs value={value} onChange={handleChange}  aria-label="styled tabs example">
-                <StyledTab  label="پوست بدن"/>
-                <StyledTab label="پوست و موی سر"/>
-                <StyledTab label="پوست صورت و گردن"/>
+                {
+
+                    props.tabs.map(eachTab =>{
+                        return <StyledTab key={eachTab} label={eachTab}/>
+                    }
+               )
+
+                }
+
+                {/*<StyledTab label="پوست و موی سر"/>*/}
+                {/*<StyledTab label="پوست صورت و گردن"/>*/}
             </StyledTabs>
         </div>
 

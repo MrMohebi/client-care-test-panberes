@@ -1,240 +1,375 @@
-import React, {useState} from 'react';
-import PanberesLogo from "../components/PanberesLogo";
+import React, {useEffect, useState} from 'react';
 import '../css/Main.css'
-import Tabs from "../components/Tabs";
-import SkinType from "../components/skinType";
-import ChoiceGenerator from "../functions/choicesGenerator";
-import gsap from "gsap";
-import $ from "jquery";
+import MC from "../components/MC";
+import male from '../assets/img/vectors/male.png'
+import maleBody from '../assets/img/vectors/male-body.png'
+import maleFullBody from '../assets/img/vectors/male-full-body.png'
 
 
 const Male = () => {
-    let [choicesElement,setChoicesElement] = useState(0)
-    let choices = [
-        [{
-            name: 'خط پیشانی',
-            vectorX: 20,
-            vectorY: 240,
-            leftOffset: 8
+    let [currentPart, setPart] = useState(0)
+
+    let vectors = [
+        {
+            vector: male,
+            size: {
+                x: 150,
+                y: 300
+            }
+        }, {
+            vector: maleBody,
+            size: {
+                x: 200,
+                y: 325
+            }
+        }, {
+            vector: maleFullBody,
+            size: {
+                x: 105,
+                y: 373
+            }
         },
-            {
-                name: 'خط   اخم',
-                vectorX: 30,
-                vectorY: 220,
-                leftOffset: 4
-            }, {
-            name: 'نیاز به آب رسان',
-            vectorX: 40,
-            vectorY: 260,
-            leftOffset: 4
-        }, {
-            name: 'نیاز به نرم کننده',
-            vectorX: 60,
-            vectorY: 230,
-            leftOffset: 9
-        }, {
-            name: 'خط گوشه چشم',
-            vectorX: 70,
-            vectorY: 200,
-            leftOffset: 3
-        }, {
-            name: 'منافز باز',
-            vectorX: 80,
-            vectorY: 170,
-            leftOffset: 5
-        }],
-
-
-
-        [{
-            name: 'فرو رفتگی پوست',
-            vectorX: 50,
-            vectorY: 200,
-            leftOffset: 6
-        },
-            {
-                name: 'جای جوش',
-                vectorX: 30,
-                vectorY: 220,
-                leftOffset: 6
-            }, {
-            name: 'خالی شدن ابرو',
-            vectorX: 40,
-            vectorY: 260,
-            leftOffset: 6
-        }, {
-            name: 'لک و کک و مک',
-            vectorX: 60,
-            vectorY: 230,
-            leftOffset: 6
-        }, {
-            name: 'پاکسازی صورت',
-            vectorX: 70,
-            vectorY: 200,
-            leftOffset: 6
-        }, {
-            name: 'جوش سر سیاه',
-            vectorX: 80,
-            vectorY: 170,
-            leftOffset: 6
-        }],
-
-
-
-        [{
-            name: 'حساسیت بعد از اصلاح',
-            vectorX: 20,
-            vectorY: 40,
-            leftOffset: 6
-        },
-            {
-                name: 'جوش سر سفید',
-                vectorX: 30,
-                vectorY: 220,
-                leftOffset: 6
-            }, {
-            name: 'جوش التهابی',
-            vectorX: 40,
-            vectorY: 260,
-            leftOffset: 6
-        }, {
-            name: 'خط پشت لب',
-            vectorX: 60,
-            vectorY: 230,
-            leftOffset: 6
-        }, {
-            name: 'خط لبخند',
-            vectorX: 70,
-            vectorY: 200,
-            leftOffset: 6
-        }, {
-            name: 'افتادگی پوست و غبغب',
-            vectorX: 80,
-            vectorY: 170,
-            leftOffset: 6
-        }],
-
-
-
 
     ]
-    let userChoices = []
-
-    let changeSection = (newSectionId)=>{
-        let storedUserChoices = JSON.parse(window.sessionStorage.getItem('UserChoices'))
-
-        let firstTime = true;
-
-        for (let index = 0;index<document.querySelector('.selects').childNodes.length;index++){
-            // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[0], {
-            //     strokeDashoffset: 1000,
-            //     duration:0.1,
-            //     delay:0.3,
-            //
-            // })
-            // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1], {
-            //     strokeDashoffset: 1000,
-            //     duration:0.1
-            // })
-            //
-            // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[0], {
-            //     strokeDashoffset: 0,
-            //     delay:0.8,
-            // })
-            // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1], {
-            //     strokeDashoffset: 0,
-            //     delay:1.2
-            // })
 
 
-            gsap.to(document.querySelector('.selects').childNodes[index].firstChild, {
-                x: -20,
-                opacity: 0,
-                duration:0.2,
-                onComplete:()=>{
-                    if (firstTime){
-                        setChoicesElement(newSectionId)
-                        firstTime = false;
-                    }
-                    for (let index = 0;index<document.querySelector('.selects').childNodes.length;index++){
-                        if (storedUserChoices) {
-                            if (storedUserChoices.includes(choices[newSectionId][index].name)){
-                                console.log('male have it')
-                                gsap.to(document.querySelector('.selects').childNodes[index].firstChild.firstChild.firstChild.firstChild, {
-                                    scale: '0.8',
-                                    opacity: '1',
-                                    ease: "elastic.out(1, 2)"
-                                })
-                            }else{
-                                gsap.to(document.querySelector('.selects').childNodes[index].firstChild.firstChild.firstChild.firstChild, {
-                                    scale: '0',
-                                    opacity: '0',
-                                    ease: "elastic.out(1, 2)"
-                                })
-                            }
-                        }
+    useEffect(() => {
 
-
-                        gsap.to(document.querySelector('.selects').childNodes[index].firstChild, {
-                            x:0,
-                            opacity: 1,
-                            delay: 0.1 * index,
-                            duration:0.2,
-                            onComplete:()=>{
-                                setChoicesElement(newSectionId)
-                            }
-
-                        })
-                        let x1Line1 = window.innerWidth - $('#line' + index).position().left - choices[newSectionId][index].vectorX
-                        document.querySelector('.selects').childNodes[index].childNodes[1].firstChild.style.transformOrigin = x1Line1 / 2 + "px 0px"
-                        document.querySelector('.selects').childNodes[index].childNodes[1].firstChild.x1.baseVal.value = window.innerWidth - $('#line' + index).position().left - choices[newSectionId][index].vectorX
-                        document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1].x1.baseVal.value = window.innerWidth - $('#line' + index).position().left - choices[newSectionId][index].vectorX
-                        document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1].y2.baseVal.value = window.innerHeight - $('#line' + index).position().top - choices[newSectionId][index].vectorY
-                        document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1].x2.baseVal.value = window.innerWidth - $('#line' + index).position().left - choices[newSectionId][index].vectorX
-                        gsap.to(document.querySelector('.selects').childNodes[index].firstChild, {
-                            x: 0,
-                            opacity: 1,
-                            delay: 0.1 * index,
-                            onComplete: () => {
-                                // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[0], {
-                                //     strokeDashoffset: 0,
-                                // })
-                                // gsap.to(document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1], {
-                                //     strokeDashoffset: 0,
-                                //     delay: 0.2
-                                // })
-                            }
-                        })
-                    }
-
-                }
-
-            })
-
-        }
-        firstTime = true;
-
-    }
-    let tabsChangeCallback = ((backData)=>{
-        console.log(backData)
-        changeSection(backData)
-    })
-    return (
-        <div className={'w-100 h-100 male-main-container'}>
-            <PanberesLogo/>
-            <Tabs tabsChangeCallback={tabsChangeCallback}/>
-            <div className={'mt-3'}>
-                <SkinType/>
-            </div>
-
-            <div className={'vector-holder'}/>
-            <div className={'selects'}>
+    }, [currentPart])
+    let choices = [
+        [
+            [
                 {
-                    <ChoiceGenerator choices={choices[choicesElement]} userChoices={userChoices} />
+                    name: 'خط پیشانی',
+                    vectorX: 20,
+                    vectorY: 240,
+                    leftOffset: 6
+                },
+                {
+                    name: 'خط   اخم',
+                    vectorX: 30,
+                    vectorY: 220,
+                    leftOffset: 6
+                },
+                {
+                    name: 'نیاز به آب رسان',
+                    vectorX: 60,
+                    vectorY: 235,
+                    leftOffset: 6
+                },
+                {
+                    name: 'نیاز به نرم کننده',
+                    vectorX: 70,
+                    vectorY: 230,
+                    leftOffset: 6
+                },
+                {
+                    name: 'خط گوشه چشم',
+                    vectorX: 70,
+                    vectorY: 200,
+                    leftOffset: 6
+                },
+                {
+                    name: 'منافز باز',
+                    vectorX: 80,
+                    vectorY: 170,
+                    leftOffset: 6
+                }
+            ],
+
+
+            [
+                {
+                    name: 'فرو رفتگی پوست',
+                    vectorX: 40,
+                    vectorY: 250,
+                    leftOffset: 6
+                },
+                {
+                    name: 'جای جوش',
+                    vectorX: 65,
+                    vectorY: 260,
+                    leftOffset: 6
+                },
+                {
+                    name: 'خالی شدن ابرو',
+                    vectorX: 50,
+                    vectorY: 225,
+                    leftOffset: 6
+                },
+                {
+                    name: 'لک و کک و مک',
+                    vectorX: 10,
+                    vectorY: 175,
+                    leftOffset: 6
+                },
+                {
+                    name: 'پاکسازی صورت',
+                    vectorX: 65,
+                    vectorY: 175,
+                    leftOffset: 6
+                },
+                {
+                    name: 'جوش سر سیاه',
+                    vectorX: 50,
+                    vectorY: 140,
+                    leftOffset: 6
+                }
+            ],
+
+
+            [
+                {
+                    name: 'حساسیت بعد از اصلاح',
+                    vectorX: 20,
+                    vectorY: 300,
+                    leftOffset: 6
+                },
+                {
+                    name: 'جوش سر سفید',
+                    vectorX: 30,
+                    vectorY: 250,
+                    leftOffset: 6
+                },
+                {
+                    name: 'جوش التهابی',
+                    vectorX: 50,
+                    vectorY: 235,
+                    leftOffset: 6
+                },
+                {
+                    name: 'خط پشت لب',
+                    vectorX: 30,
+                    vectorY: 155,
+                    leftOffset: 6
+                },
+                {
+                    name: 'خط لبخند',
+                    vectorX: 40,
+                    vectorY: 150,
+                    leftOffset: 6
+                },
+                {
+                    name: 'افتادگی پوست و غبغب',
+                    vectorX: 80,
+                    vectorY: 170,
+                    leftOffset: 6
+                }
+            ],
+
+
+            [
+                {
+                    name: 'تیرگی زیر چشم',
+                    vectorX: 50,
+                    vectorY: 200,
+                    leftOffset: 6
+                },
+                {
+                    name: 'کوپروز',
+                    vectorX: 35,
+                    vectorY: 225,
+                    leftOffset: 6
+                },
+                {
+                    name: 'پف زیر چشم',
+                    vectorX: 75,
+                    vectorY: 200,
+                    leftOffset: 6
+                },
+                {
+                    name: 'اگزما',
+                    vectorX: 40,
+                    vectorY: 225,
+                    leftOffset: 6
+                },
+                {
+                    name: 'شل شدن پوست',
+                    vectorX: 70,
+                    vectorY: 200,
+                    leftOffset: 6
+                },
+                {
+                    name: 'افتادگی در ناحیه دکلته',
+                    vectorX: 80,
+                    vectorY: 170,
+                    leftOffset: 6
+                }
+            ]
+        ],
+
+
+//-----------------------------------------second page ------------------------------
+        [
+            [
+                {
+                    name: 'انواع موخوره',
+                    vectorX: 60,
+                    vectorY: 325,
+                    leftOffset: 6
+                },
+                {
+                    name: 'کدری موها',
+                    vectorX: 70,
+                    vectorY: 310,
+                    leftOffset: 6
+                },
+                {
+                    name: 'نازکی و شکنندگی مو',
+                    vectorX: 80,
+                    vectorY: 320,
+                    leftOffset: 6
+                },
+                {
+                    name: 'خشکی ساقه و نوک مو',
+                    vectorX: 50,
+                    vectorY: 290,
+                    leftOffset: 6
+                },
+                {
+                    name: 'خشکی زیاد موهای صورت',
+                    vectorX: 70,
+                    vectorY: 225,
+                    leftOffset: 6
+                }
+            ],
+            [
+
+                {
+                    name: 'شوره یا پوسته',
+                    vectorX: 50,
+                    vectorY: 325,
+                    leftOffset: 6
+                },
+
+
+                {
+                    name: 'خارش و التهاب کف سر',
+                    vectorX: 80,
+                    vectorY: 300,
+                    leftOffset: 6
+                },
+                {
+                    name: 'آسیب بر اثر رنگ و دکلره',
+                    vectorX: 90,
+                    vectorY: 300,
+                    leftOffset: 6
+                },
+                {
+                    name: 'آسیب بر اثر اتو و سشوار',
+                    vectorX: 90,
+                    vectorY: 300,
+                    leftOffset: 6
+                },
+                {
+                    name: 'ریزش مو',
+                    vectorX: 70,
+                    vectorY: 300,
+                    leftOffset: 6
+                },
+            ]
+        ],
+
+        //---------------------------------third
+
+        [
+            [
+                {
+                    name: 'خشکی بعد از حمام',
+                    vectorX: 40,
+                    vectorY: 350,
+                    leftOffset: 8
+                },
+                {
+                    name: 'خشکی در نواحی دست ها',
+                    vectorX: 90,
+                    vectorY: 275,
+                    leftOffset: 10
+                },
+                {
+                    name: 'لک های قهوه ای پشت دست ها',
+                    vectorX: 90,
+                    vectorY: 175,
+                    leftOffset: 10
+                },
+                {
+                    name: 'چروک و پیری دست',
+                    vectorX: 90,
+                    vectorY: 275,
+                    leftOffset: 6
+                },
+                {
+                    name: 'ایپلاسیون و دیپلاسیون',
+                    vectorX: 60,
+                    vectorY: 100,
+                    leftOffset: 6
+                }
+            ],
+
+            [
+
+                {
+                    name: 'افتادگی پوست',
+                    vectorX: 40,
+                    vectorY: 250,
+                    leftOffset: 6
+                },
+                {
+                    name: 'ترک های بعد از رژیم',
+                    vectorX: 45,
+                    vectorY: 350,
+                    leftOffset: 6
+                },
+                {
+                    name: 'جوش های التهابی',
+                    vectorX: 50,
+                    vectorY: 325,
+                    leftOffset: 6
+                },
+                {
+                    name: 'التهاب در نواحی حساس',
+                    vectorX: 10,
+                    vectorY: 175,
+                    leftOffset: 6
+                },
+                {
+                    name: 'بوی بد پاها',
+                    vectorX: 65,
+                    vectorY: 100,
+                    leftOffset: 6
+                },
+                {
+                    name: 'خشکی بدن',
+                    vectorX: 50,
+                    vectorY: 140,
+                    leftOffset: 6
+                }
+            ],
+
+        ]
+
+    ]
+
+    return (
+        <div>
+            <div className={'vector-helper-y'}>
+                {
+
+                    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(eachNum => {
+                        return (
+                            <div key={eachNum + 10} className={'helpers-y'}> {eachNum * 50 + 50}</div>
+                        )
+                    })
 
                 }
             </div>
+            <MC tabs={['پوست صورت و گردن', 'پوست و موی سر', 'پوست بدن']} refreshBack={setPart}
+                backgroundClass={'male-main-container'}
+                colorTheme={'male'}
+                choices={choices[currentPart]} vector={`url(${vectors[currentPart]['vector']})`}
+                vecWidth={vectors[currentPart]['size']['x']} vecHeight={vectors[currentPart]['size']['y']}/>
         </div>
+
     );
 };
 

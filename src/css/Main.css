@@ -2,11 +2,34 @@ html, body, #___gatsby, main, #gatsby-focus-wrapper {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  position: relative;
+}
+
+html {
+  display: grid;
+  place-items: center;
+}
+
+body {
+  max-width: 600px;
 }
 
 * {
   margin: 0;
   padding: 0;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 @font-face {
@@ -99,16 +122,17 @@ html, body, #___gatsby, main, #gatsby-focus-wrapper {
   background: linear-gradient(to bottom, #E4F0FF, #fff);
 }
 
+.female-main-container {
+  background: linear-gradient(to bottom, #FAE0EC, #fff);
+}
+
 .vector-holder {
   position: absolute;
   bottom: 0;
   right: 0;
-  background: url("../assets/img/vectors/maleVec.png");
-  width: 150px;
-  height: 300px;
-  background-position: center;
-  background-size: 100%;
-  background-repeat: no-repeat;
+  background-position: center !important;
+  background-size: 100% !important;
+  background-repeat: no-repeat !important;
 }
 
 .skin-type-container {
@@ -150,6 +174,9 @@ html, body, #___gatsby, main, #gatsby-focus-wrapper {
   width: 100%;
   position: relative;
   margin-top: 30px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 80vh;
 }
 .selects div .check-boxes {
   opacity: 0;
@@ -202,9 +229,97 @@ html, body, #___gatsby, main, #gatsby-focus-wrapper {
 }
 
 svg line {
-  transition: stroke-dashoffset 0.4s ease;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
+}
+
+.p-event-none {
+  pointer-events: none;
+}
+
+.skin-type-submit {
+  background: #745597;
+  border-radius: 10px;
+  width: 200px;
+  color: white;
+  font-family: IranYekan, serif;
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.submit-button {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 70px;
+}
+
+.tab-holder .MuiTabs-root {
+  overflow: scroll !important;
+}
+.tab-holder .MuiTabs-scroller {
+  overflow: scroll !important;
+}
+
+.vector-helper-y {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-flow: column-reverse;
+  height: 200px;
+  z-index: 999;
+}
+
+.helpers-y {
+  border: solid #20b870 2px;
+  min-height: 46px;
+}
+
+.opacityDown {
+  animation-name: opacityDown;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes opacityDown {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.opacityUp {
+  animation-name: opacityUp;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes opacityUp {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.next-submit-button {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-position: center !important;
+  background-size: 100% !important;
 }
 
 /*# sourceMappingURL=Main.css.map */
