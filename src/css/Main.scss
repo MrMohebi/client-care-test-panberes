@@ -6,12 +6,14 @@ html, body, #___gatsby, main, #gatsby-focus-wrapper {
   //max-width: 600px;
   position: relative;
 }
-html{
+
+html {
   display: grid;
   place-items: center;
 }
-body{
-max-width: 600px;
+
+body {
+  max-width: 600px;
 }
 
 
@@ -27,8 +29,8 @@ max-width: 600px;
 
 /* Hide scrollbar for IE, Edge and Firefox */
 * {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 // --------------------custom classes--------------------
@@ -135,6 +137,7 @@ $genderImageSize: 70px;
 .male-main-container {
   background: linear-gradient(to bottom, #E4F0FF, #fff);
 }
+
 .female-main-container {
   background: linear-gradient(to bottom, #FAE0EC, #fff);
 }
@@ -294,44 +297,50 @@ svg line {
   align-items: center;
   width: 70px;
 }
-.tab-holder{
-  .MuiTabs-root{
+
+.tab-holder {
+  .MuiTabs-root {
     overflow: scroll !important;
   }
- .MuiTabs-scroller{
-   overflow: scroll !important;
 
- }
+  .MuiTabs-scroller {
+    overflow: scroll !important;
+
+  }
 }
-.vector-helper-y{
+
+.vector-helper-y {
   position: absolute;
-  bottom:0;
+  bottom: 0;
   right: 0;
   display: flex;
-  flex-flow:column-reverse;
+  flex-flow: column-reverse;
   height: 200px;
   z-index: 999;
 }
-.helpers-y{
+
+.helpers-y {
   border: solid #20b870 2px;
   min-height: 46px;
 }
-.opacityDown{
+
+.opacityDown {
   animation-name: opacityDown;
-  animation-duration: 0.5s;
+  animation-duration: 0.3s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
 @keyframes opacityDown {
-  from{
+  from {
     opacity: 1;
   }
-  to{
+  to {
     opacity: 0;
   }
 }
-.opacityUp{
+
+.opacityUp {
   animation-name: opacityUp;
   animation-duration: 0.5s;
   animation-iteration-count: 1;
@@ -339,20 +348,78 @@ svg line {
 }
 
 @keyframes opacityUp {
-  from{
+  from {
     opacity: 0;
   }
-  to{
+  to {
     opacity: 1;
   }
 }
 
-.next-submit-button{
+.next-submit-button {
   width: 50px;
   height: 50px;
   position: absolute;
-  bottom:20px ;
+  bottom: 20px;
   left: 20px;
   background-position: center !important;
   background-size: 100% !important;
+}
+
+.dialog-submit-button {
+  width: 50px;
+  height: 50px;
+  margin-left: 15px;
+  background-position: center !important;
+  background-size: 100% !important;
+}
+
+.health-dialog {
+  opacity: 0;
+}
+
+.check-container {
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+.each-question-content {
+  min-width: 50%;
+  font-size: 0.8rem;
+  direction: rtl;
+  //transform: scale(0.8);
+}
+
+.each-question-title {
+  direction: rtl;
+  padding: 0 10px;
+  font-size: 0.8rem;
+  font-family: IranYekan, sans-serif;
+}
+
+.each-question-content {
+  .check-box-round {
+    transform: scale(0.7);
+  }
+}
+
+.health-dialog-main-container {
+  overflow-y: scroll;
+  padding-bottom: 100px;
+}
+
+.dialog-submit-button-container {
+  width: 100%;
+  height: 50px;
+}
+.question-labels{
+  font-family: IranYekan,sans-serif;
+  margin-right: 10px;
+}
+.each-question-checkbox{
+  margin-top: 10px;
+}
+.questions-radio{
+  margin-left: 10px;
+  margin-top: 10px;
 }

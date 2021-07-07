@@ -352,17 +352,17 @@ const Male = () => {
 
     return (
         <div>
-            <div className={'vector-helper-y'}>
-                {
+            {/*<div className={'vector-helper-y'}>*/}
+            {/*    {*/}
 
-                    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(eachNum => {
-                        return (
-                            <div key={eachNum + 10} className={'helpers-y'}> {eachNum * 50 + 50}</div>
-                        )
-                    })
+            {/*        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(eachNum => {*/}
+            {/*            return (*/}
+            {/*                <div key={eachNum + 10} className={'helpers-y'}> {eachNum * 50 + 50}</div>*/}
+            {/*            )*/}
+            {/*        })*/}
 
-                }
-            </div>
+            {/*    }*/}
+            {/*</div>*/}
             <MC tabs={['پوست صورت و گردن', 'پوست و موی سر', 'پوست بدن']} refreshBack={setPart}
                 backgroundClass={'male-main-container'}
                 colorTheme={'male'}

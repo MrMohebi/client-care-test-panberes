@@ -47,13 +47,14 @@ const ChoiceGenerator = (props) => {
                     document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1].x1.baseVal.value = window.innerWidth - $('#line' + index).position().left - eachChoice.vectorX
                     document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1].y2.baseVal.value = window.innerHeight - $('#line' + index).position().top - eachChoice.vectorY
                     document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1].x2.baseVal.value = window.innerWidth - $('#line' + index).position().left - eachChoice.vectorX
-                    gsap.to(document.querySelector('.selects').childNodes[index].firstChild, {
-                        x: 0,
-                        opacity: 1,
-                        delay: 0.1 * index,
-                        onComplete: () => {
-                        }
-                    })
+                    // gsap.to(document.querySelector('.selects').childNodes[index].firstChild, {
+                    //     x: 0,
+                    //     duration:0.3,
+                    //     opacity: 1,
+                    //     delay: 0.1 * index,
+                    //     onComplete: () => {
+                    //     }
+                    // })
                 }
 
             })
