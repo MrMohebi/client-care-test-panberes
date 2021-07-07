@@ -5,11 +5,13 @@ import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, withStyles}
 import UpdateLines from "../functions/updateLines";
 
 const SkinType = (props) => {
+
     let dialogRef = React.useRef(null)
 
     const GreenRadio = withStyles({
         root: {
             color: '#735b90',
+
             '&$checked': {
                 color: "#745597",
             },
@@ -17,7 +19,7 @@ const SkinType = (props) => {
         checked: {},
     })((props) => <Radio color="default" {...props} />);
     let submitHandler = ()=>{
-        $(dialogRef.current).slideUp();
+        // $(dialogRef.current).slideUp();
         gsap.to(dialogRef.current,{
             opacity:0,
             border:'white 0px solid',
@@ -26,30 +28,34 @@ const SkinType = (props) => {
             }
         })
     }
+
+    let defaultSkinTypeOptions=[
+        {
+            title:'نوع پوست صورت و گردن شما چیست؟',
+            options:[
+                'خشک',
+                'چرب',
+                'معمولی',
+                'حساس',
+            ]
+        }
+    ]
     return (
         <div ref={dialogRef} className={'skin-type-container'}>
             <FormControl component="fieldset">
-                <FormLabel component="legend">نوع پوست صورت و گردن شما چیست؟</FormLabel>
+                <FormLabel component="legend">{defaultSkinTypeOptions[props.optionIndex]['title']}</FormLabel>
                 <RadioGroup row aria-label="position" name="position" defaultValue="normal">
-                    <FormControlLabel
-                        value="sensitive"
-                        control={<GreenRadio color="primary" />}
-                        label="حساس"
-                        labelPlacement="end"
-                    />
-                    <FormControlLabel
-                        value="normal"
-                        control={<GreenRadio color="primary" />}
-                        label="معمولی"
-                        labelPlacement="end"
-                    />
-                    <FormControlLabel
-                        value="oily"
-                        control={<GreenRadio color="primary" />}
-                        label="چرب"
-                        labelPlacement="end"
-                    />
-                    <FormControlLabel value="dry" control={<GreenRadio color="primary" />} label="خشک" labelPlacement={'end'} />
+                    {defaultSkinTypeOptions[props.optionIndex]['options'].map((eachOption,index)=>{
+                        return(
+                            <FormControlLabel
+                                key={eachOption}
+                                value={eachOption}
+                                control={<GreenRadio color="primary" />}
+                                label={eachOption}
+                                labelPlacement="end"
+                            />
+                        )
+                    })}
                 </RadioGroup>
             </FormControl>
             <button onClick={submitHandler} className={'skin-type-submit mt-3'}>تایید</button>

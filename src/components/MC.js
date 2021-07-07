@@ -33,11 +33,17 @@ const MC = (props) => {
         checkSelects()
 
     }, [choicesPart])
+
+
     let [linesClass, setLinesClass] = useState(0)
-    let [healthDialogVisible, setHealthDialogVisible] = useState(false)
+    let [skinTypeOptions, setSkinTypeOptions] = useState(0)
     const [tabVal, setTabValue] = React.useState(0);
     let choices = props.choices
     let userChoices = ['']
+
+
+
+
 
     let sectionChange = (data) => {
         setChoicesPart(0)
@@ -72,7 +78,6 @@ const MC = (props) => {
     }
 
     let checkSelects = () => {
-        if (!healthDialog){
             let storedUserChoices = JSON.parse(window.sessionStorage.getItem('UserChoices'))
             gsap.utils.toArray(document.querySelector('.selects').childNodes).map((eachChoice, index) => {
                 if (storedUserChoices) {
@@ -96,18 +101,20 @@ const MC = (props) => {
                     }
                 }
             })
-        }
+
 
     }
 
     let handleNext = (e) => {
-        // e.classList.add('p-event-none')
-        // setTimeout(()=>{
-        //     e.classList.remove('p-event-none')
-        //
-        // },1500)
-        setLinesClass('opacityDown')
+        let button = $(e.currentTarget)[0]
+        if (button){
+            button.classList.add('p-event-none')
+            setTimeout(() => {
+                button.classList.remove('p-event-none')
+            }, 1800)
+        }
 
+        setLinesClass('opacityDown')
         let element = e.currentTarget
         setTimeout(() => {
             setLinesClass('opacityUp')
@@ -140,8 +147,9 @@ const MC = (props) => {
                     }
                 })
             }
-            if (!choices[choicesPart+1]){
-                setHealthDialog(<HealthDialog colorTheme={props.colorTheme} visible={true} backgroundClass={props.backgroundClass}/>)
+            if (!choices[choicesPart + 1]) {
+                setHealthDialog(<HealthDialog colorTheme={props.colorTheme} visible={true}
+                                              backgroundClass={props.backgroundClass}/>)
             }
         }
         if (choices[choicesPart + 1]) {
@@ -203,7 +211,7 @@ const MC = (props) => {
             <PanberesLogo/>
             <Tabs tabs={props.tabs} tabsChangeCallback={tabsChangeCallback} tabVal={tabVal}/>
             <div className={'mt-3'}>
-                <SkinType choices={choices}/>
+                <SkinType choices={choices} optionIndex={0}/>
             </div>
             <div className={'vector-holder'} style={{
                 background: props.vector,

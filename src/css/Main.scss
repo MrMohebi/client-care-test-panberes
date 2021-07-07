@@ -243,6 +243,8 @@ $genderImageSize: 70px;
   width: 30px;
 }
 
+
+
 .check-box-round {
   width: 30px;
   height: 30px;
@@ -250,7 +252,8 @@ $genderImageSize: 70px;
   border-radius: 50%;
   display: grid;
   place-content: center;
-  box-shadow: #d2d2d2 0 0 11px 0;
+  //box-shadow: #d2d2d2 0 0 11px 0;
+  border:solid 1px #a2a2a2;
 }
 
 .each-option-lable {
@@ -422,4 +425,19 @@ svg line {
 .questions-radio{
   margin-left: 10px;
   margin-top: 10px;
+}
+
+legend.MuiFormLabel-root{
+  text-align: right !important;
+}
+svg.PrivateRadioButtonIcon-layer-1{
+  display: none;
+  opacity: 0.5 !important;
+}
+.PrivateSwitchBase-input-12{
+  div{
+    svg.PrivateRadioButtonIcon-layer-14{
+      display: none !important;
+    }
+  }
 }
