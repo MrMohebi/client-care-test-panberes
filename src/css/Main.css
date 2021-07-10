@@ -154,9 +154,6 @@ body {
 .skin-type-container fieldset {
   white-space: nowrap;
 }
-.skin-type-container fieldset .MuiFormGroup-row {
-  transform: scale(0.8);
-}
 .skin-type-container fieldset div {
   flex-wrap: nowrap;
 }
@@ -312,12 +309,9 @@ svg line {
     opacity: 1;
   }
 }
-.next-submit-button {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
+.next-button {
+  width: 40px;
+  height: 40px;
   background-position: center !important;
   background-size: 100% !important;
 }
@@ -391,6 +385,31 @@ svg.PrivateRadioButtonIcon-layer-1 {
 
 .PrivateSwitchBase-input-12 div svg.PrivateRadioButtonIcon-layer-14 {
   display: none !important;
+}
+
+span.MuiTypography-root {
+  font-size: 1rem !important;
+}
+
+span.MuiTypography-root {
+  font-size: 0.7rem !important;
+}
+
+.skin-type-container .MuiFormGroup-root {
+  justify-content: space-between !important;
+}
+
+.skin-type-container .MuiFormGroup-root label:last-child {
+  margin-right: 0;
+}
+
+.next-and-back-buttons {
+  width: 90px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
 }
 
 /*# sourceMappingURL=Main.css.map */

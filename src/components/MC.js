@@ -8,9 +8,9 @@ import gsap from "gsap";
 import UpdateLines from "../functions/updateLines";
 import $ from 'jquery'
 import maleNextButton from '../assets/img/buttons/next-male.png'
-import maleSubmit from '../assets/img/buttons/male-submit.png'
 import femaleNextButton from '../assets/img/buttons/female-next.png'
-import femaleSubmit from '../assets/img/buttons/female-submit.png'
+import maleBackButton from '../assets/img/buttons/back-male.png'
+import femaleBackButton from '../assets/img/buttons/back-male.png'
 import HealthDialog from "./HealthDialog";
 
 let _ = require('lodash')
@@ -19,11 +19,15 @@ let _ = require('lodash')
 const MC = (props) => {
 
 
+    let [nextButtonBackgroundImage, setNextButtonBackgroundImage] = useState(props.colorTheme === 'male' ? maleNextButton : femaleNextButton)
     let [buttonBackgroundImage, setButtonBackgroundImage] = useState(props.colorTheme === 'male' ? maleNextButton : femaleNextButton)
     let [choicesElement, setChoicesElement] = useState(0)
     let [healthDialog, setHealthDialog] = useState(<div/>)
     let [choicesGeneratorRefresh, setChoicesGeneratorRefresh] = useState(0)
     let [choicesPart, setChoicesPart] = useState(0)
+    let [skinTypeOptionIndex,setSkinTypeOptionIndex] = React.useState(0)
+    let nextButtonImage = props.colorTheme==='male'?maleNextButton:femaleNextButton
+    let backButtonImage = props.colorTheme==='male'?maleBackButton:femaleBackButton
     useEffect(() => {
 
         document.querySelector('.selects').addEventListener('scroll', _.debounce(() => {
@@ -138,13 +142,13 @@ const MC = (props) => {
                     opacity: 0,
                     duration: 0.2,
                     ease: 'expo.inOut',
-                    onComplete: () => {
-                        setButtonBackgroundImage(props.colorTheme === 'male' ? maleSubmit : femaleSubmit)
-                        gsap.to(element, {
-                            opacity: 1,
-                            duration: 0.2,
-                        })
-                    }
+                    // onComplete: () => {
+                    //     setButtonBackgroundImage(props.colorTheme === 'male' ? maleSubmit : femaleSubmit)
+                    //     gsap.to(element, {
+                    //         opacity: 1,
+                    //         duration: 0.2,
+                    //     })
+                    // }
                 })
             }
             if (!choices[choicesPart + 1]) {
@@ -179,6 +183,8 @@ const MC = (props) => {
 
             if (props.tabs[tabVal + 1]) {
                 setTabValue(tabVal + 1)
+
+                setSkinTypeOptionIndex(skinTypeOptionIndex+1)
             } else {
 
             }
@@ -187,14 +193,14 @@ const MC = (props) => {
         }
         if (!choices[choicesPart + 2]) {
         } else {
-            setButtonBackgroundImage(props.colorTheme === 'male' ? maleNextButton : femaleNextButton)
+            // setButtonBackgroundImage(props.colorTheme === 'male' ? maleNextButton : femaleNextButton)
         }
         setChoicesGeneratorRefresh(choicesGeneratorRefresh + 3)
     }
 
 
     let tabsChangeCallback = ((backData) => {
-        setButtonBackgroundImage(props.colorTheme === 'male' ? maleNextButton : femaleNextButton)
+        // setButtonBackgroundImage(props.colorTheme === 'male' ? maleNextButton : femaleNextButton)
         sectionChange(backData)
         setChoicesGeneratorRefresh(Math.random())
 
@@ -211,7 +217,7 @@ const MC = (props) => {
             <PanberesLogo/>
             <Tabs tabs={props.tabs} tabsChangeCallback={tabsChangeCallback} tabVal={tabVal}/>
             <div className={'mt-3'}>
-                <SkinType choices={choices} optionIndex={0}/>
+                <SkinType choices={choices} optionIndex={skinTypeOptionIndex}/>
             </div>
             <div className={'vector-holder'} style={{
                 background: props.vector,
@@ -228,8 +234,13 @@ const MC = (props) => {
                 }
 
             </div>
-            <div className={'next-submit-button'} style={{background: `url(${buttonBackgroundImage})`}}
-                 onClick={handleNext}/>
+            <div className={'next-and-back-buttons'}>
+                <div className={'next-button'} style={{background: `url(${nextButtonImage})`}}
+                     onClick={handleNext}/>
+                <div className={'next-button'}  style={{background: `url(${backButtonImage})`,scale:0,opacity:1,pointerEvents:'none'}}
+                     onClick={handleNext}/>
+            </div>
+
 
 
         </div>

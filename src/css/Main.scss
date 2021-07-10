@@ -178,7 +178,7 @@ $genderImageSize: 70px;
     white-space: nowrap;
 
     .MuiFormGroup-row {
-      transform: scale(0.8);
+      //transform: scale(0.8);
     }
 
     div {
@@ -244,7 +244,6 @@ $genderImageSize: 70px;
 }
 
 
-
 .check-box-round {
   width: 30px;
   height: 30px;
@@ -253,7 +252,7 @@ $genderImageSize: 70px;
   display: grid;
   place-content: center;
   //box-shadow: #d2d2d2 0 0 11px 0;
-  border:solid 1px #a2a2a2;
+  border: solid 1px #a2a2a2;
 }
 
 .each-option-lable {
@@ -359,12 +358,9 @@ svg line {
   }
 }
 
-.next-submit-button {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
+.next-button {
+  width: 40px;
+  height: 40px;
   background-position: center !important;
   background-size: 100% !important;
 }
@@ -415,29 +411,65 @@ svg line {
   width: 100%;
   height: 50px;
 }
-.question-labels{
-  font-family: IranYekan,sans-serif;
+
+.question-labels {
+  font-family: IranYekan, sans-serif;
   margin-right: 10px;
 }
-.each-question-checkbox{
+
+.each-question-checkbox {
   margin-top: 10px;
 }
-.questions-radio{
+
+.questions-radio {
   margin-left: 10px;
   margin-top: 10px;
 }
 
-legend.MuiFormLabel-root{
+legend.MuiFormLabel-root {
   text-align: right !important;
 }
-svg.PrivateRadioButtonIcon-layer-1{
+
+svg.PrivateRadioButtonIcon-layer-1 {
   display: none;
   opacity: 0.5 !important;
 }
-.PrivateSwitchBase-input-12{
-  div{
-    svg.PrivateRadioButtonIcon-layer-14{
+
+.PrivateSwitchBase-input-12 {
+  div {
+    svg.PrivateRadioButtonIcon-layer-14 {
       display: none !important;
     }
   }
+}
+
+span.MuiTypography-root {
+  font-size: 1rem !important;
+}
+
+div.MuiFormGroup-root {
+  //margin:auto;
+}
+
+span.MuiTypography-root {
+  font-size: 0.7rem !important;
+}
+
+.skin-type-container .MuiFormGroup-root {
+  justify-content: space-between !important;
+}
+
+.skin-type-container .MuiFormGroup-root {
+  label:last-child {
+    margin-right: 0
+  }
+}
+
+.next-and-back-buttons {
+  width: 90px;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
 }

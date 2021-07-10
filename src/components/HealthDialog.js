@@ -69,7 +69,7 @@ const HealthDialog = (props) => {
                 <PanberesLogo/>
                 <div className={'mt-5 health-dialog-main-container h-100'}>
                     {questions.map((eachQuestion, index) => {
-                        return <div key={eachQuestion} className={'each-question d-flex flex-column mt-2'}>
+                        return <div key={eachQuestion['title']} className={'each-question d-flex flex-column mt-2'}>
                             <span className={' w-100 each-question-title'}>{eachQuestion.title}</span>
                             <div className={'check-container w-100 d-flex flex-wrap p-3'}>
                                 <form className={'each-question-content'}>
