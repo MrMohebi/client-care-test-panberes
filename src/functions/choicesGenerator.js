@@ -1,8 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import * as svgs from '../assets/svgs'
 import gsap from "gsap";
-import $ from 'jquery';
-import UpdateLines from "./updateLines";
 
 const ChoiceGenerator = (props) => {
 
@@ -35,49 +32,15 @@ const ChoiceGenerator = (props) => {
         window.addEventListener('resize', (e) => {
             setRefresh(e)
         })
-
-
-        let listSelects = () => {
-            props.choices.map((eachChoice, index) => {
-
-                if ($('#line' + index).position()) {
-                    let x1Line1 = document.body.innerWidth - $('#line' + index).position().left - eachChoice.vectorX
-                    document.querySelector('.selects').childNodes[index].childNodes[1].firstChild.style.transformOrigin = x1Line1 / 2 + "px 0px"
-                    document.querySelector('.selects').childNodes[index].childNodes[1].firstChild.x1.baseVal.value = window.innerWidth - $('#line' + index).position().left - eachChoice.vectorX
-                    document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1].x1.baseVal.value = window.innerWidth - $('#line' + index).position().left - eachChoice.vectorX
-                    document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1].y2.baseVal.value = window.innerHeight - $('#line' + index).position().top - eachChoice.vectorY
-                    document.querySelector('.selects').childNodes[index].childNodes[1].childNodes[1].x2.baseVal.value = window.innerWidth - $('#line' + index).position().left - eachChoice.vectorX
-                    // gsap.to(document.querySelector('.selects').childNodes[index].firstChild, {
-                    //     x: 0,
-                    //     duration:0.3,
-                    //     opacity: 1,
-                    //     delay: 0.1 * index,
-                    //     onComplete: () => {
-                    //     }
-                    // })
-                }
-
-            })
-        }
-        setTimeout(() => {
-
-            listSelects()
-            UpdateLines(props.choices, 0)
-
-
-            // checkSelects()
-        }, 1000)
         checkSelects()
-
-
     }, [refresh, props.refresh]);
 
 
     return (
         props.choices.map((eachChoise, index) => {
             return (
-                <div id={'choise-' + index} key={index} className={'options-container '}
-                     style={{marginLeft: eachChoise.leftOffset + 'rem'}}>
+                <div id={'choise-' + index} key={index} className={'options-container choices '}
+                     style={{marginLeft: eachChoise.leftOffset*10 + '%'}}>
                     <div className={'check-boxes'}>
                         <div className={'options'} onClick={(e) => {
                             let storedUserChoices = JSON.parse(window.sessionStorage.getItem('UserChoices'))
@@ -112,8 +75,6 @@ const ChoiceGenerator = (props) => {
                         }}>
 
                             <div className={'check-box-round'}>
-                                {/*{svgs.check}*/}
-
                                 <svg style={{transform: 'scale(0)', opacity: 0}} width={32} height={32} version="1.1"
                                      id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                 >
@@ -139,7 +100,6 @@ const ChoiceGenerator = (props) => {
                                   stroke: '  rgb(72 72 72)',
                                   strokeWidth: 0.5,
                                   position: 'absolute',
-                                  transform: 'rotate(180deg)'
                               }}/>
                         <line x1='0' y1="0" x2='0' y2='0'
                               style={{stroke: ' rgb(72 72 72)', strokeWidth: 0.5, position: 'absolute'}}/>

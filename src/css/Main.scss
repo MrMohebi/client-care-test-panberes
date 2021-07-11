@@ -4,7 +4,6 @@ html, body, #___gatsby, main, #gatsby-focus-wrapper {
   width: 100%;
   overflow: hidden;
   //max-width: 600px;
-  position: relative;
 }
 
 html {
@@ -211,10 +210,10 @@ $genderImageSize: 70px;
   height: 80vh;
 
   div {
-    .check-boxes {
-      opacity: 0;
-      transform: translate(-20px, 0);
-    }
+    //.check-boxes {
+    //  opacity: 0;
+    //  transform: translate(-20px, 0);
+    //}
   }
 }
 
@@ -253,6 +252,7 @@ $genderImageSize: 70px;
   place-content: center;
   //box-shadow: #d2d2d2 0 0 11px 0;
   border: solid 1px #a2a2a2;
+  z-index: 12;
 }
 
 .each-option-lable {
@@ -266,15 +266,25 @@ $genderImageSize: 70px;
   display: flex;
   justify-content: flex-end;
 }
-
+.personal-info-inputs{
+  border: solid 1px #d6d6d6;
+  border-radius: 5px;
+  padding: 2px 5px;
+  font-family: 'IRANYekan', serif;
+  outline: none;
+  direction: rtl;
+  text-align: center;
+  margin-top: 20px;
+}
 svg line {
   //transition: stroke-dashoffset 1s ease;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
+  stroke-dasharray: 0;
+  stroke-dashoffset: 0;
 }
 
+
 .p-event-none {
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 .skin-type-submit {
@@ -354,7 +364,7 @@ svg line {
     opacity: 0;
   }
   to {
-    opacity: 1;
+    opacity: 0.8;
   }
 }
 
@@ -472,4 +482,21 @@ span.MuiTypography-root {
   position: absolute;
   left: 20px;
   bottom: 20px;
+}
+.personal-data-title{
+  font-size: 1.5rem;
+}
+.personal-data-submit{
+  outline: none;
+  border: solid 1px #cecece;
+  border-radius: 20px;
+  position: absolute;
+  bottom: 80px;
+  right: 50%;
+  font-size: 1.2rem;
+  height: 44px;
+  -webkit-transform: translate(50%, 0);
+  transform: translate(50%, 0);
+  width: 173px;
+  color: white;
 }
