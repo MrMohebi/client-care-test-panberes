@@ -2,13 +2,11 @@ import React, {useEffect} from 'react';
 import PanberesLogo from "./PanberesLogo";
 import maleSubmit from '../assets/img/buttons/male-submit.png'
 import femaleSubmit from '../assets/img/buttons/female-submit.png'
-import PersonalInfo from "./PersonalInfo";
 
 
 const HealthDialog = (props) => {
 
         let [dialogOpacity, setdialogOpacity] = React.useState(0)
-        let [PersonalInfoDialog, setPersonalInfoDialog] = React.useState(null)
         useEffect(() => {
             setdialogOpacity(1)
         }, [])
@@ -47,16 +45,14 @@ const HealthDialog = (props) => {
         ]
 
         let handleSubmit = () => {
-            setPersonalInfoDialog(
-                <PersonalInfo backgroundClass={props.backgroundClass} colorTheme={props.colorTheme}/>
-            );
+            props.setCurrentSection(2)
+            // setPersonalInfoDialog(
+            //     <PersonalInfo backgroundClass={props.backgroundClass} colorTheme={props.colorTheme}/>
+            // );
         }
 
             return (
                 <div>
-                    {
-                        PersonalInfoDialog
-                    }
                     <div className={'health-dialog w-100 h-100 position-absolute ' + props.backgroundClass}
                          style={{zIndex: 99, opacity: dialogOpacity, transition: 'all 0.5s ease'}}>
                         <PanberesLogo/>

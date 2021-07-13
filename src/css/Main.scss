@@ -483,6 +483,7 @@ span.MuiTypography-root {
   left: 20px;
   bottom: 20px;
 }
+
 .personal-data-title{
   font-size: 1.5rem;
 }
@@ -500,3 +501,12 @@ span.MuiTypography-root {
   width: 173px;
   color: white;
 }
+.section-back-button{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 30px;
+  width: 30px;
+  z-index: 999999;
+}
+
