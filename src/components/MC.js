@@ -28,8 +28,17 @@ const MC = (props) => {
         let userChoices = ['']
         let nextButtonImage = props.colorTheme === 'male' ? maleNextButton : femaleNextButton
         let backButtonImage = props.colorTheme === 'male' ? maleBackButton : femaleBackButton
-        useEffect(() => {
+        let checkInterval = setInterval(() => {
+            checkSelects()
+        }, 800)
 
+        useEffect(() => {
+            window.addEventListener("resize",_.debounce(
+                ()=>{
+                    UpdateLines(tabVal, choicesPart, props.colorTheme)
+
+                }
+                ,300))
             document.querySelector('.selects').addEventListener('scroll', _.debounce(() => {
                 setLinesClass('opacityUp')
             }, 100))
@@ -83,29 +92,32 @@ const MC = (props) => {
 
         let checkSelects = () => {
             let storedUserChoices = JSON.parse(window.sessionStorage.getItem('UserChoices'))
-            gsap.utils.toArray(document.querySelector('.selects').childNodes).map((eachChoice, index) => {
-                if (storedUserChoices) {
-                    if (document.querySelector('.selects').childNodes[index]) {
-                        if (eachChoice.firstChild.firstChild.childNodes[1]) {
+            if (document.querySelector('.selects')) {
+                gsap.utils.toArray(document.querySelector('.selects').childNodes).map((eachChoice, index) => {
+                    if (storedUserChoices) {
+                        if (document.querySelector('.selects').childNodes[index]) {
+                            if (eachChoice.firstChild.firstChild.childNodes[1]) {
 
-                        }
-                        if (storedUserChoices.includes(eachChoice.firstChild.firstChild.childNodes[1].innerHTML)) {
-                            gsap.to(document.querySelector('.selects').childNodes[index].firstChild.firstChild.firstChild.firstChild, {
-                                scale: '0.8',
-                                opacity: '1',
-                                ease: "elastic.out(1, 2)"
-                            })
-                        } else {
-                            gsap.to(document.querySelector('.selects').childNodes[index].firstChild.firstChild.firstChild.firstChild, {
-                                scale: '0',
-                                opacity: '0',
-                                ease: "elastic.out(1, 2)"
-                            })
+                            }
+                            if (storedUserChoices.includes(eachChoice.firstChild.firstChild.childNodes[1].innerHTML)) {
+                                gsap.to(document.querySelector('.selects').childNodes[index].firstChild.firstChild.firstChild.firstChild, {
+                                    scale: '0.8',
+                                    opacity: '1',
+                                    ease: "elastic.out(1, 2)"
+                                })
+                            } else {
+                                gsap.to(document.querySelector('.selects').childNodes[index].firstChild.firstChild.firstChild.firstChild, {
+                                    scale: '0',
+                                    opacity: '0',
+                                    ease: "elastic.out(1, 2)"
+                                })
+                            }
                         }
                     }
-                }
-            })
-
+                })
+            } else {
+                clearInterval(checkInterval)
+            }
         }
 
         let handleNext = (e) => {
@@ -141,10 +153,6 @@ const MC = (props) => {
                 }
                 if (!choices[choicesPart + 1]) {
                     setCurrentSection(1)
-                    // setHealthDialog(<HealthDialog setCurrentSection={setCurrentSection} colorTheme={props.colorTheme}
-                    //                               visible={true}
-                    //                               backgroundClass={props.backgroundClass}/>)
-                    //
                 }
             }
 
@@ -271,65 +279,69 @@ const MC = (props) => {
         }
 
         return (
-                <div className={'w-100 h-100 position-absolute ' + props.backgroundClass}>
+            <div className={'w-100 h-100 position-absolute ' + props.backgroundClass}>
+                {
+                    currentSection === 0 ?
+                        <Link to={'/'} className={'section-back-button'}>
+                            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd"
+                                 clipRule="evenodd">
+                                <path
+                                    d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"/>
+                            </svg>
+                        </Link>
+                        :
+                        <div className={'section-back-button'} onClick={backClickHandler}>
+                            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd"
+                                 clipRule="evenodd">
+                                <path
+                                    d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"/>
+                            </svg>
+                        </div>
+                }
+
+                {
+                    currentSection >= 1 ?
+                        <HealthDialog setCurrentSection={setCurrentSection} colorTheme={props.colorTheme} visible={true}
+                                      backgroundClass={props.backgroundClass}/> : <div/>
+                }
+                {
+                    currentSection >= 2 ?
+                        <PersonalInfo backgroundClass={props.backgroundClass} colorTheme={props.colorTheme}/> :
+                        <div/>
+
+                }
+
+
+                <PanberesLogo/>
+                <Tabs tabs={props.tabs} tabsChangeCallback={tabsChangeCallback} tabVal={tabVal}/>
+                <div className={'mt-3'}>
+                    <SkinType choices={choices} optionIndex={skinTypeOptionIndex}/>
+                </div>
+                <div className={'vector-holder'} style={{
+                    background: props.vector,
+                    width: props.vecWidth,
+                    height: props.vecHeight,
+                }}/>
+
+                <div className={'selects'} onScroll={() => {
+                    setLinesClass('opacityDown')
+                }}>
                     {
-                        currentSection === 0?
-                            <Link to={'/'} className={'section-back-button'} >
-                                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
-                                    <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"/>
-                                </svg>
-                            </Link>
-                            :
-                            <div className={'section-back-button'} onClick={backClickHandler}>
-                                <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
-                                    <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"/>
-                                </svg>
-                            </div>
+                        <ChoiceGenerator refresh={choicesGeneratorRefresh} choices={choices[choicesPart]}
+                                         linesClass={linesClass} userChoices={userChoices}/>
                     }
-
-                    {
-                        currentSection >= 1 ?
-                            <HealthDialog setCurrentSection={setCurrentSection} colorTheme={props.colorTheme} visible={true}
-                                          backgroundClass={props.backgroundClass}/> : <div/>
-                    }
-                    {
-                        currentSection >= 2 ?
-                            <PersonalInfo backgroundClass={props.backgroundClass} colorTheme={props.colorTheme}/> :
-                            <div/>
-
-                    }
-
-
-                    <PanberesLogo/>
-                    <Tabs tabs={props.tabs} tabsChangeCallback={tabsChangeCallback} tabVal={tabVal}/>
-                    <div className={'mt-3'}>
-                        <SkinType choices={choices} optionIndex={skinTypeOptionIndex}/>
-                    </div>
-                    <div className={'vector-holder'} style={{
-                        background: props.vector,
-                        width: props.vecWidth,
-                        height: props.vecHeight,
-                    }}/>
-
-                    <div className={'selects'} onScroll={() => {
-                        setLinesClass('opacityDown')
-                    }}>
-                        {
-                            <ChoiceGenerator refresh={choicesGeneratorRefresh} choices={choices[choicesPart]}
-                                             linesClass={linesClass} userChoices={userChoices}/>
-                        }
-
-                    </div>
-                    <div className={'next-and-back-buttons'}>
-                        <div className={'next-button'} style={{background: `url(${nextButtonImage})`}}
-                             onClick={handleNext}/>
-                        <div className={'next-button back-button'}
-                             style={{background: `url(${backButtonImage})`, scale: 0, opacity: 0, pointerEvents: 'none'}}
-                             onClick={handleBack}/>
-                    </div>
-
 
                 </div>
+                <div className={'next-and-back-buttons'}>
+                    <div className={'next-button'} style={{background: `url(${nextButtonImage})`}}
+                         onClick={handleNext}/>
+                    <div className={'next-button back-button'}
+                         style={{background: `url(${backButtonImage})`, scale: 0, opacity: 0, pointerEvents: 'none'}}
+                         onClick={handleBack}/>
+                </div>
+
+
+            </div>
 
 
         );

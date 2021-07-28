@@ -21,7 +21,6 @@ const IndexPage = () => {
 
     useEffect(() => {
         window.sessionStorage.setItem('UserChoices','[]')
-
     },[]);
 
     return (
