@@ -36,7 +36,6 @@ const MC = (props) => {
             window.addEventListener("resize",_.debounce(
                 ()=>{
                     UpdateLines(tabVal, choicesPart, props.colorTheme)
-
                 }
                 ,300))
             document.querySelector('.selects').addEventListener('scroll', _.debounce(() => {
@@ -48,6 +47,11 @@ const MC = (props) => {
 
 
         let sectionChange = (data) => {
+
+
+            setSkinTypeOptionIndex(data)
+
+
             setLinesClass('opacityDown')
             if (data > 0) {
                 gsap.to('.back-button', {
