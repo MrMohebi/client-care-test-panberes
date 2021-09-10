@@ -24,6 +24,7 @@ const MC = (props) => {
         let [linesClass, setLinesClass] = useState(0)
         const [tabVal, setTabValue] = React.useState(0);
         let [currentSection, setCurrentSection] = React.useState(0)
+        let [currentTabIndex, setCurrentTabIndex] = React.useState(0)
         let choices = props.choices
         let userChoices = ['']
         let nextButtonImage = props.colorTheme === 'male' ? maleNextButton : femaleNextButton
@@ -47,11 +48,8 @@ const MC = (props) => {
 
 
         let sectionChange = (data) => {
-
-
+            setCurrentTabIndex(data)
             setSkinTypeOptionIndex(data)
-
-
             setLinesClass('opacityDown')
             if (data > 0) {
                 gsap.to('.back-button', {
@@ -310,7 +308,7 @@ const MC = (props) => {
                 }
                 {
                     currentSection >= 2 ?
-                        <PersonalInfo backgroundClass={props.backgroundClass} colorTheme={props.colorTheme}/> :
+                        <PersonalInfo choiceParts={props.choices} backgroundClass={props.backgroundClass} colorTheme={props.colorTheme}/> :
                         <div/>
 
                 }
@@ -331,7 +329,7 @@ const MC = (props) => {
                     setLinesClass('opacityDown')
                 }}>
                     {
-                        <ChoiceGenerator refresh={choicesGeneratorRefresh} choices={choices[choicesPart]}
+                        <ChoiceGenerator currentTabIndex={currentTabIndex} refresh={choicesGeneratorRefresh} choices={choices[choicesPart]}
                                          linesClass={linesClass} userChoices={userChoices}/>
                     }
 

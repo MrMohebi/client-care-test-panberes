@@ -82,7 +82,7 @@ const SkinType = (props) => {
         },
         {
             title: 'نوع پوست بدن شما چیست؟',
-            id: 'bodySkin',
+            id: 'bodySkinType',
             options: [
                 ['dry', 'خشک'],
                 ['oily', 'چرب'],

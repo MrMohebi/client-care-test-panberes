@@ -4,6 +4,7 @@ import gsap from "gsap";
 const ChoiceGenerator = (props) => {
 
     let [refresh, setRefresh] = useState(0)
+    let [currentChoicePart, SCCp] = useState('')
 
     let checkSelects = () => {
         let storedUserChoices = JSON.parse(window.sessionStorage.getItem('UserChoices'))
@@ -29,21 +30,35 @@ const ChoiceGenerator = (props) => {
     }
 
     useEffect(() => {
+        switch (props.currentTabIndex) {
+            case 0 :
+                SCCp('faceAndNeckSkin')
+                break;
+            case 1 :
+                SCCp('hairAndHeadSkin')
+                break;
+            case 2 :
+                SCCp('bodySkin')
+                break;
+
+        }
         window.addEventListener('resize', (e) => {
             setRefresh(e)
         })
         checkSelects()
-    }, [refresh, props.refresh]);
+    }, [refresh, props.refresh, props.currentTabIndex]);
 
 
     return (
         props.choices.map((eachChoise, index) => {
+            console.log(eachChoise)
             return (
                 <div id={'choise-' + index} key={index} className={'options-container choices '}
-                     style={{marginLeft: eachChoise.leftOffset*10 + '%'}}>
+                     style={{marginLeft: eachChoise.leftOffset * 10 + '%'}}>
                     <div className={'check-boxes'}>
                         <div className={'options'} onClick={(e) => {
                             let storedUserChoices = JSON.parse(window.sessionStorage.getItem('UserChoices'))
+
                             if (storedUserChoices) {
                                 if (storedUserChoices.includes(eachChoise.name)) {
                                     gsap.to(e.currentTarget.firstChild.firstChild, {
@@ -61,11 +76,15 @@ const ChoiceGenerator = (props) => {
 
                                 if (storedUserChoices.includes(eachChoise.name)) {
                                     let afterFilter = storedUserChoices.filter(eachItem =>
-                                        eachItem !== eachChoise.name
+                                        eachItem.choiceName !== eachChoise.name
                                     )
                                     window.sessionStorage.setItem('UserChoices', JSON.stringify(afterFilter));
                                 } else {
-                                    storedUserChoices.push(eachChoise.name)
+                                    storedUserChoices.push(
+
+                                           eachChoise.name,
+
+                                    )
                                     window.sessionStorage.setItem('UserChoices', JSON.stringify(storedUserChoices));
                                 }
 
