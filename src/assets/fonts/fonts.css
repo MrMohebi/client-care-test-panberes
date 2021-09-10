@@ -1,0 +1,15 @@
+@font-face {
+    font-family:IranYekan ;
+    src: url("IRANYekanRegular.ttf") format('truetype');
+}
+.IranYekan{
+    font-family:IranYekan,serif ;
+}
+@font-face {
+    font-family:IranYekanBlack ;
+    src: url("IRANYekanBlack.ttf") format('truetype');
+}
+.IranYekanBlack{
+    font-family:IranYekanBlack,serif ;
+}
+

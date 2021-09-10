@@ -42,7 +42,6 @@ export default function CustomizedTabs(props) {
         setTimeout(() => {
             try {
                 tabRef.current.classList.remove('p-event-none')
-
             }catch (e){
                 console.log(e)
             }
@@ -65,9 +64,6 @@ export default function CustomizedTabs(props) {
                )
 
                 }
-
-                {/*<StyledTab label="پوست و موی سر"/>*/}
-                {/*<StyledTab label="پوست صورت و گردن"/>*/}
             </StyledTabs>
         </div>
 

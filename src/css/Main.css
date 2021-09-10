@@ -222,6 +222,7 @@ body {
 }
 
 .personal-info-inputs {
+  transition: all 0.2s ease;
   border: solid 1px #d6d6d6;
   border-radius: 5px;
   padding: 2px 5px;
@@ -230,6 +231,9 @@ body {
   direction: rtl;
   text-align: center;
   margin-top: 20px;
+}
+.personal-info-inputs:focus {
+  box-shadow: #46525d 0px 0px 4px;
 }
 
 svg line {

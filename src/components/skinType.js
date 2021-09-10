@@ -8,22 +8,21 @@ const SkinType = (props) => {
     let dialogRef = React.useRef(null)
     let [content, setContent] = React.useState(<div/>)
     let handleRadioChange = (e, titleKey) => {
-
         let currentSkinTypes = JSON.parse(window.sessionStorage.getItem('skinTypes'))
-        if (currentSkinTypes) {
-        } else {
-            currentSkinTypes = {}
+        if (currentSkinTypes === null) {
+            let key = titleKey.id
+
+            let data = {}
+            data[key] = e.currentTarget.value
+            window.sessionStorage.setItem('skinTypes', JSON.stringify(data
+            ))
+        }else{
+            currentSkinTypes[titleKey.id] = e.currentTarget.value
+            window.sessionStorage.setItem('skinTypes', JSON.stringify(currentSkinTypes))
         }
-        currentSkinTypes[titleKey['id']] = e.target.value
-        window.sessionStorage.setItem('skinTypes', JSON.stringify(currentSkinTypes))
     }
-    let skinTypeSessionStorageHandler = (type,) => {
-
-    }
-
 
     useEffect(() => {
-        console.log(props)
         if (defaultSkinTypeOptions[props.optionIndex]) {
             setContent(
                 <FormControl component="fieldset">
@@ -95,7 +94,6 @@ const SkinType = (props) => {
     return (
         <div ref={dialogRef} className={'skin-type-container'}>
             {content}
-            {/*<button onClick={submitHandler} className={'skin-type-submit mt-3'}>تایید</button>*/}
         </div>
     );
 };
