@@ -28,7 +28,6 @@ let sendUserData = (code,name,phone,gender,testResult,age,addressText,addressCoo
         })
     }).then((res) => {
         callback(res)
-
     })
 
 }

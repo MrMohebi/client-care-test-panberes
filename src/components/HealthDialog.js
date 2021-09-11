@@ -13,7 +13,7 @@ const HealthDialog = (props) => {
         }, [])
         let questions = [
             {
-                key: 'dailyActivity',
+                key: 'activityTime',
                 title: 'میزان ساعت فعالیت بدنی در روز شامل هرگونه فعالیت از جمله پیاده روی و کار سخت',
                 options: {
                     0: 'بدون فعالیت',
@@ -23,7 +23,7 @@ const HealthDialog = (props) => {
                 }
             },
             {
-                key: 'dailyDrink',
+                key: 'useSupplementsInWeek',
                 title: 'میزان استفاده از نوشیدنی های مکمل غذایی مرسوم در بازه زمانی یک هفته ( ویتامین ، کافیین و...)',
                 options: {
                     0: 'عدم استفاده',
@@ -33,7 +33,7 @@ const HealthDialog = (props) => {
             }
         ]
         let extraChoices = {
-            key: "extraChoice",
+            key: "other",
             title: 'در صورت داشتن هرکدام از گزینه های زیر آن را انتخاب کنید\n',
             options: [
                 'احساس خستگس در طول  روز',

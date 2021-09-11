@@ -32,15 +32,32 @@ const PersonalInfo = (props) => {
         let name = $('#name').val()
         let age = parseInt($('#age').val())
         let phone = $('#phone').val()
-        let userChoices = JSON.parse(getSessionItem('userChoices'))
-        let skinTypes = getSessionItem('skinTypes')
+        let userChoices = JSON.parse(window.sessionStorage.getItem('UserChoices'))
+        let skinTypes = JSON.parse(window.sessionStorage.getItem('skinTypes'))
         let questions = getSessionItem('questions')
         let UserChoices = getSessionItem('UserChoices')
-        let testResult = {}
-        testResult['userChoices'] = userChoices
-        testResult['skinTypes'] = skinTypes
-        testResult['questions'] = questions
-        testResult['UserChoices'] = UserChoices
+        let other = getSessionItem('userExtraChoices')
+        let testResult = {
+            faceAndNeckSkin:[],
+            hairAndHeadSkin:[],
+            bodySkin:[],
+            faceAndNeckSkinType:'',
+            hairAndHeadSkinType:'',
+            bodySkinType:'',
+            activityTime:'',
+            other:''
+
+        }
+        userChoices.map(eachItem=>{
+            if (eachItem.search('part=')>-1){
+               let part = eachItem.split('part=')[1]
+                testResult[part].push(eachItem.split('part=')[0])
+            }
+        })
+        testResult.other = other
+        Object.keys(skinTypes).map(eachKey=>{
+            testResult[eachKey]=skinTypes[eachKey]
+        })
         if (phone.length === 11){
             sendUserData(code, name, phone, gender, testResult, age, '', '', maritalStatus, (res) => {
                 if (res['data']) {
@@ -53,7 +70,6 @@ const PersonalInfo = (props) => {
                         window.location.href = "https://panberes.com";
                         SBC(<span className={'IranYekan '}> تایید</span>)
                         SBD(false)
-
                     })
                 }
             })

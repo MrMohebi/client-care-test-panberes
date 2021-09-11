@@ -2,11 +2,13 @@ import React, {useEffect} from 'react';
 import gsap from "gsap";
 import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, withStyles} from "@material-ui/core";
 import UpdateLines from "../functions/updateLines";
+import _ from 'lodash'
 
 const SkinType = (props) => {
 
     let dialogRef = React.useRef(null)
     let [content, setContent] = React.useState(<div/>)
+    let [currentChecked, scc] = React.useState('')
     let handleRadioChange = (e, titleKey) => {
         let currentSkinTypes = JSON.parse(window.sessionStorage.getItem('skinTypes'))
         if (currentSkinTypes === null) {
@@ -22,31 +24,6 @@ const SkinType = (props) => {
         }
     }
 
-    useEffect(() => {
-        if (defaultSkinTypeOptions[props.optionIndex]) {
-            setContent(
-                <FormControl component="fieldset">
-                    <FormLabel component="legend">{defaultSkinTypeOptions[props.optionIndex]['title']}</FormLabel>
-                    <RadioGroup row aria-label="position" name="position" onChange={(e) => {
-                        handleRadioChange(e, defaultSkinTypeOptions[props.optionIndex])
-                    }}>
-                        {defaultSkinTypeOptions[props.optionIndex]['options'].map((eachOption, index) => {
-                            return (
-                                <FormControlLabel
-                                    key={eachOption[0]}
-                                    value={eachOption[0]}
-                                    control={<GreenRadio color="primary"/>}
-                                    label={eachOption[1]}
-                                    labelPlacement="end"
-                                />
-                            )
-                        })}
-                    </RadioGroup>
-                </FormControl>
-            )
-        }
-
-    }, [props.optionIndex])
 
     const GreenRadio = withStyles({
         root: {
@@ -59,7 +36,6 @@ const SkinType = (props) => {
         checked: {},
     })((props) => <Radio color="default" {...props} />);
     let submitHandler = () => {
-        // $(dialogRef.current).slideUp();
         gsap.to(dialogRef.current, {
             opacity: 0,
             border: 'white 0px solid',
@@ -72,21 +48,30 @@ const SkinType = (props) => {
     let defaultSkinTypeOptions = [
         {
             title: 'نوع پوست صورت و گردن شما چیست؟',
-            id: 'faceAndNeckSkin',
+            id: 'faceAndNeckSkinType',
             options: [
-                ['dry', 'خشک'],
-                ['oily', 'چرب'],
-                ['normal', 'معمولی'],
-                ['sensitive', 'حساس'],
+                ['face_dry', 'خشک'],
+                ['face_oily', 'چرب'],
+                ['face_normal', 'معمولی'],
+                ['face_sensitive', 'حساس'],
+            ]
+        },
+        {
+            title: 'نوع پوست مو و سر شما چیست؟',
+            id: 'hairAndHeadSkinType',
+            options: [
+                ['hair_dry', 'خشک'],
+                ['hair_oily', 'چرب'],
+                ['hair_normal', 'معمولی'],
             ]
         },
         {
             title: 'نوع پوست بدن شما چیست؟',
             id: 'bodySkinType',
             options: [
-                ['dry', 'خشک'],
-                ['oily', 'چرب'],
-                ['normal', 'معمولی'],
+                ['body_dry', 'خشک'],
+                ['body_oily', 'چرب'],
+                ['body_normal', 'معمولی'],
             ]
         },
 
@@ -94,6 +79,33 @@ const SkinType = (props) => {
     return (
         <div ref={dialogRef} className={'skin-type-container'}>
             {content}
+
+            {
+                defaultSkinTypeOptions.map((eachItem,index)=>{
+                    return(
+                        <FormControl style={{
+                            display:props.optionIndex!==index?'none':'block'
+                        }} component="fieldset">
+                            <FormLabel component="legend">{defaultSkinTypeOptions[props.optionIndex]['title']}</FormLabel>
+                            <RadioGroup row aria-label="position" name="position" onChange={(e) => {
+                                handleRadioChange(e, defaultSkinTypeOptions[props.optionIndex])
+                            }}>
+                                {eachItem.options.map((eachOption, index) => {
+                                    return (
+                                        <FormControlLabel
+                                            key={eachOption[0]}
+                                            value={eachOption[1]}
+                                            control={<GreenRadio color="primary"/>}
+                                            label={eachOption[1]}
+                                            labelPlacement="end"
+                                        />
+                                    )
+                                })}
+                            </RadioGroup>
+                        </FormControl>
+                    )
+                })
+            }
         </div>
     );
 };

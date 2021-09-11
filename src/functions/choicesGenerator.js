@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import gsap from "gsap";
-
+let _=require('lodash')
 const ChoiceGenerator = (props) => {
 
     let [refresh, setRefresh] = useState(0)
@@ -51,7 +51,6 @@ const ChoiceGenerator = (props) => {
 
     return (
         props.choices.map((eachChoise, index) => {
-            console.log(eachChoise)
             return (
                 <div id={'choise-' + index} key={index} className={'options-container choices '}
                      style={{marginLeft: eachChoise.leftOffset * 10 + '%'}}>
@@ -75,19 +74,15 @@ const ChoiceGenerator = (props) => {
                                 }
 
                                 if (storedUserChoices.includes(eachChoise.name)) {
-                                    let afterFilter = storedUserChoices.filter(eachItem =>
-                                        eachItem.choiceName !== eachChoise.name
-                                    )
-                                    window.sessionStorage.setItem('UserChoices', JSON.stringify(afterFilter));
+                                    _.pullAt(storedUserChoices,[_.indexOf(storedUserChoices,eachChoise.name),_.indexOf(storedUserChoices,eachChoise.name)+1])
+                                    window.sessionStorage.setItem('UserChoices', JSON.stringify(storedUserChoices));
                                 } else {
                                     storedUserChoices.push(
-
-                                           eachChoise.name,
-
+                                        eachChoise.name,
+                                        eachChoise.name + 'part=' + currentChoicePart,
                                     )
                                     window.sessionStorage.setItem('UserChoices', JSON.stringify(storedUserChoices));
                                 }
-
                             } else {
                                 window.sessionStorage.setItem('UserChoices', '[]');
                             }

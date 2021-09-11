@@ -310,7 +310,6 @@ const MC = (props) => {
                     currentSection >= 2 ?
                         <PersonalInfo choiceParts={props.choices} backgroundClass={props.backgroundClass} colorTheme={props.colorTheme}/> :
                         <div/>
-
                 }
 
 
