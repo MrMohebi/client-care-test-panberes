@@ -3,6 +3,10 @@ import $ from "jquery";
 import * as options from '../assets/options'
 
 function UpdateLines(section, part,gender) {
+    console.log('lines Updated')
+    console.log(section)
+    console.log(part)
+    console.log(gender)
     let genderOptions = gender==='male'?options.maleOptions:options.femaleOptions
     try {
         for (let index = 0; index < document.querySelector('.selects').childNodes.length; index++) {
@@ -27,7 +31,6 @@ function UpdateLines(section, part,gender) {
             }
         }
     }catch (e){
-        console.log(e)
     }
 
 }

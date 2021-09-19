@@ -1,14 +1,12 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import gsap from "gsap";
 import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, withStyles} from "@material-ui/core";
 import UpdateLines from "../functions/updateLines";
-import _ from 'lodash'
 
 const SkinType = (props) => {
 
     let dialogRef = React.useRef(null)
     let [content, setContent] = React.useState(<div/>)
-    let [currentChecked, scc] = React.useState('')
     let handleRadioChange = (e, titleKey) => {
         let currentSkinTypes = JSON.parse(window.sessionStorage.getItem('skinTypes'))
         if (currentSkinTypes === null) {
@@ -35,15 +33,6 @@ const SkinType = (props) => {
         },
         checked: {},
     })((props) => <Radio color="default" {...props} />);
-    let submitHandler = () => {
-        gsap.to(dialogRef.current, {
-            opacity: 0,
-            border: 'white 0px solid',
-            onComplete: () => {
-                UpdateLines(props.choices, 0);
-            }
-        })
-    }
 
     let defaultSkinTypeOptions = [
         {
@@ -83,14 +72,14 @@ const SkinType = (props) => {
             {
                 defaultSkinTypeOptions.map((eachItem,index)=>{
                     return(
-                        <FormControl style={{
+                        <FormControl key={index} style={{
                             display:props.optionIndex!==index?'none':'block'
                         }} component="fieldset">
                             <FormLabel component="legend">{defaultSkinTypeOptions[props.optionIndex]['title']}</FormLabel>
                             <RadioGroup row aria-label="position" name="position" onChange={(e) => {
                                 handleRadioChange(e, defaultSkinTypeOptions[props.optionIndex])
                             }}>
-                                {eachItem.options.map((eachOption, index) => {
+                                {eachItem.options.map((eachOption) => {
                                     return (
                                         <FormControlLabel
                                             key={eachOption[0]}

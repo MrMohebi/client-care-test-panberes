@@ -168,7 +168,7 @@ export let maleOptions =
             {
                 name: 'انواع موخوره',
                 vectorX: 50,
-                vectorY: 325,
+                vectorY: 300,
                 leftOffset: 6
             },
             {
@@ -180,7 +180,7 @@ export let maleOptions =
             {
                 name: 'نازکی و شکنندگی مو',
                 vectorX: 100,
-                vectorY: 220,
+                vectorY: 250,
                 leftOffset: 3.5
             },
             {
@@ -200,7 +200,7 @@ export let maleOptions =
 
             {
                 name: 'شوره یا پوسته',
-                vectorX: 50,
+                vectorX: 60,
                 vectorY: 325,
                 leftOffset: 5
             },

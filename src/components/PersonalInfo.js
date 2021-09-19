@@ -3,15 +3,12 @@ import PanberesLogo from "./PanberesLogo";
 import {ButtonBase} from "@material-ui/core";
 import sendUserData from "../assets/queries/MainQueries";
 import $ from 'jquery'
-import lottie from 'lottie-web'
 import {CircleSpinner} from "react-spinners-kit";
 import Swal from "sweetalert2";
-import {BrowserRouter, Redirect} from "react-router-dom";
 
 
 const PersonalInfo = (props) => {
     let [dialogOpacity, setDialogOpacity] = React.useState(0)
-    let [successDialogOpacity, SSDO] = React.useState(0)
     let [gender, sg] = React.useState('male')
     let [buttonContent, SBC] = React.useState(<span className={'IranYekan'}>تایید</span>)
     let [maritalStatus, sm] = React.useState('male')
@@ -34,8 +31,6 @@ const PersonalInfo = (props) => {
         let phone = $('#phone').val()
         let userChoices = JSON.parse(window.sessionStorage.getItem('UserChoices'))
         let skinTypes = JSON.parse(window.sessionStorage.getItem('skinTypes'))
-        let questions = getSessionItem('questions')
-        let UserChoices = getSessionItem('UserChoices')
         let other = getSessionItem('userExtraChoices')
         let testResult = {
             faceAndNeckSkin:[],
@@ -60,6 +55,8 @@ const PersonalInfo = (props) => {
         })
         if (phone.length === 11){
             sendUserData(code, name, phone, gender, testResult, age, '', '', maritalStatus, (res) => {
+                console.log(res
+                )
                 if (res['data']) {
                     Swal.fire(
                         'عملیات موفق',

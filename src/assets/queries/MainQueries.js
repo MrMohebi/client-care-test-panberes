@@ -4,6 +4,7 @@ import $ from 'jquery'
 
 let QueryURL = 'https://api-panberes.devmrm.ir/graphql';
 let sendUserData = (code,name,phone,gender,testResult,age,addressText,addressCoordinates,maritalStatus,callback)=>{
+    console.log(`${JSON.stringify(testResult)}`)
     let query = `
    mutation{
    testResult(
@@ -11,7 +12,7 @@ let sendUserData = (code,name,phone,gender,testResult,age,addressText,addressCoo
    name:"${name}"
    phone:"${phone}"
    gender:"${gender}"
-   testResult:"${testResult}"
+   testResult:${JSON.stringify(testResult)}
    age:${age}
    addressText:"${addressText}"
    addressCoordinates:"${addressCoordinates}"

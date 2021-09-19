@@ -34,11 +34,11 @@ const MC = (props) => {
         }, 800)
 
         useEffect(() => {
-            window.addEventListener("resize",_.debounce(
-                ()=>{
+            window.addEventListener("resize", _.debounce(
+                () => {
                     UpdateLines(tabVal, choicesPart, props.colorTheme)
                 }
-                ,300))
+                , 300))
             document.querySelector('.selects').addEventListener('scroll', _.debounce(() => {
                 setLinesClass('opacityUp')
             }, 100))
@@ -50,7 +50,7 @@ const MC = (props) => {
         let sectionChange = (data) => {
             setCurrentTabIndex(data)
             setSkinTypeOptionIndex(data)
-            setLinesClass('opacityDown')
+            // setLinesClass('opacityDown')
             if (data > 0) {
                 gsap.to('.back-button', {
                     opacity: 1,
@@ -59,37 +59,67 @@ const MC = (props) => {
                 })
             }
 
-            setTimeout(() => {
-                setLinesClass('opacityUp')
-            }, 1500)
+            // setTimeout(() => {
+            //     setLinesClass('opacityUp')
+            // }, 1500)
+
+
+            // gsap.to('.choices', {
+            //     opacity: 0,
+            //     stagger: 0.1,
+            //     onComplete: () => {
+            //         setChoicesPart(0)
+            //         setChoicesGeneratorRefresh(data)
+            //         gsap.to('.vector-holder', {
+            //             x: 300,
+            //             ease: 'expo.inOut',
+            //
+            //             onComplete: () => {
+            //                 setTimeout(() => {
+            //                     UpdateLines(tabVal, 0, props.colorTheme)
+            //                 }, 500)
+            //                 props.refreshBack(data)
+            //                 gsap.to('.vector-holder', {
+            //                     x: 0,
+            //                     ease: 'expo.inOut',
+            //                 })
+            //             }
+            //         })
+            //         gsap.to('.choices', {
+            //             opacity: 1,
+            //             stagger: 0.1,
+            //         })
+            //     }
+            // })
+
+
+            //new
+            setTabValue(data)
+            setLinesClass('opacityDown')
             gsap.to('.choices', {
                 opacity: 0,
+                x: 10,
                 stagger: 0.1,
+                duration: 0.2,
                 onComplete: () => {
                     setChoicesPart(0)
                     setChoicesGeneratorRefresh(data)
-                    gsap.to('.vector-holder', {
-                        x: 300,
-                        ease: 'expo.inOut',
+                    // UpdateLines(tabVal, 0, props.colorTheme)
+                    setTimeout(() => {
+                        UpdateLines(data, 0, props.colorTheme)
+                        setLinesClass('opacityUp')
 
-                        onComplete: () => {
-                            setTimeout(() => {
-                                UpdateLines(tabVal, 0, props.colorTheme)
-                            }, 500)
-                            props.refreshBack(data)
-                            gsap.to('.vector-holder', {
-                                x: 0,
-                                ease: 'expo.inOut',
-                            })
-                        }
-                    })
+                    }, 1000)
+                    props.refreshBack(data)
+
                     gsap.to('.choices', {
                         opacity: 1,
+                        x: 0,
                         stagger: 0.1,
+                        duration: 0.2,
                     })
                 }
             })
-
         }
 
         let checkSelects = () => {
@@ -131,11 +161,11 @@ const MC = (props) => {
                     button.classList.remove('p-event-none')
                 }, 1800)
             }
-            setLinesClass('opacityDown')
+            // setLinesClass('opacityDown')
 
             let element = e.currentTarget
             setTimeout(() => {
-                setLinesClass('opacityUp')
+                // setLinesClass('opacityUp')
             }, 1500)
 
             gsap.to(element, {
@@ -207,12 +237,12 @@ const MC = (props) => {
                 }, 1800)
             }
 
-            setLinesClass('opacityDown')
+            // setLinesClass('opacityDown')
 
 
             let element = e.currentTarget
             setTimeout(() => {
-                setLinesClass('opacityUp')
+                // setLinesClass('opacityUp')
             }, 1500)
 
             gsap.to(element, {
@@ -308,7 +338,8 @@ const MC = (props) => {
                 }
                 {
                     currentSection >= 2 ?
-                        <PersonalInfo choiceParts={props.choices} backgroundClass={props.backgroundClass} colorTheme={props.colorTheme}/> :
+                        <PersonalInfo choiceParts={props.choices} backgroundClass={props.backgroundClass}
+                                      colorTheme={props.colorTheme}/> :
                         <div/>
                 }
 
@@ -328,7 +359,8 @@ const MC = (props) => {
                     setLinesClass('opacityDown')
                 }}>
                     {
-                        <ChoiceGenerator currentTabIndex={currentTabIndex} refresh={choicesGeneratorRefresh} choices={choices[choicesPart]}
+                        <ChoiceGenerator currentTabIndex={currentTabIndex} refresh={choicesGeneratorRefresh}
+                                         choices={choices[choicesPart]}
                                          linesClass={linesClass} userChoices={userChoices}/>
                     }
 
